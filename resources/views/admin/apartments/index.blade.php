@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container mt-5">
-    <h1 class="mb-4">Apartments</h1>
+    <h1 class="mb-4">Apartments - {{$user->email}}</h1>
     <div class="row row-cols-4">
 
         @foreach($apartments as $apartment)

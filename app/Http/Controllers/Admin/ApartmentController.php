@@ -6,19 +6,22 @@ use App\Models\User;
 use App\Models\Apartment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     ** @return \Illuminate\Http\Response
      */
-    public function index(User $user, Apartment $apartment)
+    public function index(Apartment $apartment)
     {
-        $apartments = Apartment::where($user->id = $apartment->user_id)->paginate(10);
+        $user = Auth::user();
 
-        return view('admin.apartments.index', compact('apartments'));
+        $apartments = Apartment::where('user_id', '=', $user->id)->paginate(10);
+
+        return view('admin.apartments.index', compact('apartments', 'user'));
     }
 
     /**
