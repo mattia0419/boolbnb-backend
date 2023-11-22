@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 
@@ -10,11 +11,14 @@ class ApartmentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     ** @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user, Apartment $apartment)
     {
-        //
+
+        $apartments = Apartment::where($user->id = $apartment->user_id)->paginate(10);
+
+        return view('admin.apartments.index', compact('apartments'));
     }
 
     /**
