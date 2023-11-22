@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Apartment;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ApartmentController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ApartmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Apartment  $apartment
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
+    public function show($id)
     {
         //
     }
@@ -52,10 +52,10 @@ class ApartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Apartment  $apartment
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Apartment $apartment)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +64,10 @@ class ApartmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Apartment  $apartment
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Apartment $apartment)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +75,10 @@ class ApartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Apartment  $apartment
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Apartment $apartment)
+    public function destroy($id)
     {
         //
     }
