@@ -1,1 +1,18 @@
-@import '~bootstrap/scss/bootstrap'
+@import "~bootstrap/scss/bootstrap";
+
+.card-image {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    height: 150px;
+    overflow: hidden;
+    img {
+        object-fit: cover;
+        position: relative;
+        bottom: 50%;
+        left: 0;
+
+        // object-fit: cover;
+        // width: 350px;
+        // height: 200px;
+    }
+}
