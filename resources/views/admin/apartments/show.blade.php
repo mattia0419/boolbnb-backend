@@ -68,12 +68,11 @@
             <div class="col-12">
                 <hr>
                 <div class="row row-cols-1 row-cols-md-2">
-                    <p>SADASD</p>
-                    <p>SADASD</p>
-                    <p>SADASD</p>
-                    <p>SADASD</p>
-                    <p>SADASD</p>
-                    <p>SADASD</p>
+                    @foreach ($apartment->services as $service)
+                        <p>
+                            {{ $service->label }}
+                        </p>
+                    @endforeach
                 </div>
             </div>
         </div>

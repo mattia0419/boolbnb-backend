@@ -3,6 +3,9 @@
 @section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Apartments - {{ $user->first_name }}</h1>
+        <div class=" text-rigth">
+            <a href="{{ route('admin.apartments.create') }}" class="btn col-4 btn-primary">INSERISCI</a>
+        </div>
         <h6 class="text-secondary">Clicca sulle card per maggiori informazioni</h6>
         <div class="row row-cols-lg-4 row-cols-1 g-4 ">
 
