@@ -55,9 +55,15 @@ class ApartmentController extends Controller
         $apartment->user_id = $user->id;
 
         $apartment->fill($data);
+
         $cover_image_path = Storage::put("uploads/apartments/{$apartment->id}/cover_img", $data['cover_img']);
         $apartment->cover_img = $cover_image_path;
         $apartment->save();
+
+        if (Arr::exists($data, "services")) {
+
+            $apartment->services()->attach($data["services"]);
+        }
 
         $client = new Client(['verify' => false]);
         $address = urlencode($apartment->address);
@@ -75,10 +81,6 @@ class ApartmentController extends Controller
         $apartment->save();
 
 
-        if (Arr::exists($data, "services")) {
-
-            $apartment->services()->attach($data["services"]);
-        }
         return redirect()->route("admin.apartments.index", $apartment);
 
     }
@@ -118,13 +120,17 @@ class ApartmentController extends Controller
     {
         $data = $request->validated();
         $apartment->update($data);
-        if ($request->hasFile('cover_img')) {
+        if ($request->hasFile('cover_img') && $request->file('cover_img')->isValid()) {
             if ($apartment->cover_img) {
                 Storage::delete($apartment->cover_img);
             }
 
             $image_path = Storage::put("uploads/apartments/{$apartment->id}/cover_img", $data["cover_img"]);
             $apartment->cover_img = $image_path;
+        }
+
+        if (Arr::exists($data, "services")) {
+            $apartment->services()->sync($data["services"]);
         }
 
         $client = new Client(['verify' => false]);
@@ -135,17 +141,20 @@ class ApartmentController extends Controller
                 'key' => 'EoW1gArKxlBBEKl68AZm1uhfhcLougV4',
             ],
         ]);
-        error_log(print_r($response, true));
+        error_log(print_r($response, true));  // * <--
         $data = json_decode($response->getBody(), true);
         $apartment->latitude = $data['results'][0]['position']['lat'];
         $apartment->longitude = $data['results'][0]['position']['lon'];
-
         $apartment->save();
 
-        if (Arr::exists($data, "services"))
-            $apartment->services()->sync($data["services"]);
-
         return redirect()->route("admin.apartments.show", compact("apartment"));
+        //# *
+
+        // * volendo è possibile toglierlo. o aggiungerlo sotto con catch (\Exception $e) {
+        // * Gestisci l'errore in qualche modo, ad esempio registrandolo o restituendo una risposta di errore.
+        // * Log::error($e->getMessage());
+        // * return response()->json(['error' => 'Errore durante la chiamata API.'], 500);
+        // * }     questo punto è possibile inserirllo dove sta l'asterisco.
 
     }
 

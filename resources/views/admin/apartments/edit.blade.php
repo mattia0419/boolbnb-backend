@@ -123,7 +123,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-12">
+            <div class="col-12 mx-2">
                 <label for="visible">
                     Visibility
                 </label>
