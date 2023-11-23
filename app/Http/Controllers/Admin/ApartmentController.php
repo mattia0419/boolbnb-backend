@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\StoreApartmentRequest;
+use App\Models\Service;
 use App\Models\User;
 use App\Models\Apartment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ApartmentController extends Controller
 {
@@ -27,11 +32,12 @@ class ApartmentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+    //  * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        $services = Service::all();
+        return view('admin.apartments.create', compact('services'));
     }
 
     /**
@@ -40,9 +46,26 @@ class ApartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreApartmentRequest $request)
     {
-        //
+        $user = Auth::user();
+        $data = $request->validated();
+        $apartment = new Apartment();
+        $apartment->user_id = $user->id;
+
+        $apartment->fill($data);
+        $apartment->save();
+
+        $cover_image_path = Storage::put("uploads/apartments/{$apartment->id}/cover_img", $data['cover_img']);
+        $apartment->cover_img = $cover_image_path;
+        $apartment->save();
+
+        if (Arr::exists($data, "services")) {
+
+            $apartment->services()->attach($data["services"]);
+        }
+        return redirect()->route("admin.apartments.index", $apartment);
+
     }
 
     /**
