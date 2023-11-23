@@ -127,6 +127,19 @@ class ApartmentController extends Controller
             $apartment->cover_img = $image_path;
         }
 
+        $client = new Client(['verify' => false]);
+        $address = urlencode($apartment->address);
+
+        $response = $client->get('https://api.tomtom.com/search/2/geocode/' . $address . '.json', [
+            'query' => [
+                'key' => 'EoW1gArKxlBBEKl68AZm1uhfhcLougV4',
+            ],
+        ]);
+        error_log(print_r($response, true));
+        $data = json_decode($response->getBody(), true);
+        $apartment->latitude = $data['results'][0]['position']['lat'];
+        $apartment->longitude = $data['results'][0]['position']['lon'];
+
         $apartment->save();
 
         if (Arr::exists($data, "services"))
