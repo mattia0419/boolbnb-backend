@@ -50,11 +50,12 @@
                                 </p>
                             </div>
                             <div class="card-footer mt-auto">
-                                <a href="#" class="btn col-4 btn-primary">EDIT</a>
+                                <a href="{{ route('admin.apartments.edit', $apartment) }}"
+                                    class="btn col-4 btn-primary">EDIT</a>
 
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#delete-apartment-modal-{{ $apartment->id }}">
-                                    DELATE
+                                    DELETE
                                 </button>
 
                             </div>
@@ -76,12 +77,12 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm deletion
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Are you want to delete apartment "{{ $apartment->title }}"?
+                        Do you want to delete apartment "{{ $apartment->title }}"?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
