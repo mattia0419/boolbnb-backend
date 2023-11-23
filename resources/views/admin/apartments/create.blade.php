@@ -76,33 +76,6 @@
                     </div>
                 @enderror
             </div>
-
-            <div class="col-12">
-                <label for="longitude">
-                    Longitude
-                </label>
-                <input type="number" name="longitude" id="longitude"
-                    class="form-control @error('longitude') is-invalid @enderror" value="{{ old('longitude') }}"
-                    step="any">
-                @error('longitude')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="col-12">
-                <label for="latitude">
-                    Latitude
-                </label>
-                <input type="number" name="latitude" id="latitude"
-                    class="form-control @error('latitude') is-invalid @enderror" value="{{ old('latitude') }}"
-                    step="any">
-                @error('latitude')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
             <div class="col-12">
                 <label for="price">
                     Price
