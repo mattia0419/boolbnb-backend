@@ -13,6 +13,7 @@
 
             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                 data-bs-target="#delete-apartment-modal-{{ $apartment->id }}">
+                <i class="fa-regular fa-trash-can me-2"></i>
                 DELATE
             </button>
 

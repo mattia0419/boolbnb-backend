@@ -3,10 +3,13 @@
 @section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Apartments - {{ $user->first_name }}</h1>
-        <div class=" text-rigth">
-            <a href="{{ route('admin.apartments.create') }}" class="btn col-4 btn-primary">INSERISCI</a>
+        <div class="d-flex justify-content-between mb-3">
+            <h6 class="text-secondary align-self-end">Clicca sulle card per maggiori informazioni</h6>
+            <a href="{{ route('admin.apartments.create') }}" class="btn btn-primary">
+                <i class="fa-solid fa-plus me-2"></i>
+                INSERISCI
+            </a>
         </div>
-        <h6 class="text-secondary">Clicca sulle card per maggiori informazioni</h6>
         <div class="row row-cols-lg-4 row-cols-1 g-4 ">
 
             @foreach ($apartments as $apartment)
@@ -50,12 +53,15 @@
                                 </p>
                             </div>
                             <div class="card-footer mt-auto">
-                                <a href="{{ route('admin.apartments.edit', $apartment) }}"
-                                    class="btn col-4 btn-primary">EDIT</a>
+                                <a class="btn mx-2 btn-outline-success"
+                                    href="{{ route('admin.apartments.edit', $apartment) }}">
+                                    <i class="fa-solid fa-pen me-2"></i>EDIT
+                                </a>
 
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                                     data-bs-target="#delete-apartment-modal-{{ $apartment->id }}">
-                                    DELETE
+                                    <i class="fa-regular fa-trash-can me-2"></i>
+                                    DELATE
                                 </button>
 
                             </div>
