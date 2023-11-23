@@ -87,7 +87,8 @@
                 <hr>
                 <div class="row row-cols-1 row-cols-md-2">
                     @foreach ($apartment->services as $service)
-                        <p>
+                        <p class="icon-link">
+                            <i class="{{ $service->icon }} me-2 bi"></i>
                             {{ $service->label }}
                         </p>
                     @endforeach
