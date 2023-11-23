@@ -51,8 +51,11 @@
                             </div>
                             <div class="card-footer mt-auto">
                                 <a href="#" class="btn col-4 btn-primary">EDIT</a>
-                                {{-- <a href="{{ route('admin.apartments.show', $apartment) }}"
-                                    class="btn col-4 btn-primary">DETAILS</a> --}}
+
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#delete-apartment-modal-{{ $apartment->id }}">
+                                    DELATE
+                                </button>
 
                             </div>
                         </div>
@@ -63,3 +66,37 @@
 
     </div>
 @endsection
+
+{{-- ! FORM + MODAL PER CANCELLARE --}}
+
+@section('modals')
+    @foreach ($apartments as $apartment)
+        <div class="modal fade" id="delete-apartment-modal-{{ $apartment->id }}" tabindex="-1"
+            aria-labelledby="delete-apartment-modal-{{ $apartment->id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm deletion
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you want to delete apartment "{{ $apartment->title }}"?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                        <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+@endsection
+
+{{-- ! --}}
