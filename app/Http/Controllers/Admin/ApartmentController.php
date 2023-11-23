@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\User;
 use App\Models\Apartment;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -54,11 +55,25 @@ class ApartmentController extends Controller
         $apartment->user_id = $user->id;
 
         $apartment->fill($data);
-        $apartment->save();
-
         $cover_image_path = Storage::put("uploads/apartments/{$apartment->id}/cover_img", $data['cover_img']);
         $apartment->cover_img = $cover_image_path;
         $apartment->save();
+
+        $client = new Client(['verify' => false]);
+        $address = urlencode($apartment->address);
+
+        $response = $client->get('https://api.tomtom.com/search/2/geocode/' . $address . '.json', [
+            'query' => [
+                'key' => 'EoW1gArKxlBBEKl68AZm1uhfhcLougV4',
+            ],
+        ]);
+        error_log(print_r($response, true));
+        $data = json_decode($response->getBody(), true);
+        $apartment->latitude = $data['results'][0]['position']['lat'];
+        $apartment->longitude = $data['results'][0]['position']['lon'];
+
+        $apartment->save();
+
 
         if (Arr::exists($data, "services")) {
 
