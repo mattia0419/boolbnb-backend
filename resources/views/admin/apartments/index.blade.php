@@ -50,7 +50,8 @@
                                 </p>
                             </div>
                             <div class="card-footer mt-auto">
-                                <a href="#" class="btn col-4 btn-primary">EDIT</a>
+                                <a href="{{ route('admin.apartments.edit', $apartment) }}"
+                                    class="btn col-4 btn-primary">EDIT</a>
                                 {{-- <a href="{{ route('admin.apartments.show', $apartment) }}"
                                     class="btn col-4 btn-primary">DETAILS</a> --}}
 
