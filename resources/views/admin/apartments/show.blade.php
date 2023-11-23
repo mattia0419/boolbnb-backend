@@ -2,7 +2,23 @@
 
 @section('content')
     <div class="container mt-5">
+        <div class="my-3 text-end">
+
+            <a class="btn btn-outline-primary" href="{{ route('admin.apartments.index') }}">
+                <i class="fa-solid fa-arrow-left me-2"></i>GO BACK
+            </a>
+            <a class="btn mx-2 btn-outline-success" href="{{ route('admin.apartments.edit', $apartment) }}">
+                <i class="fa-solid fa-pen me-2"></i>EDIT
+            </a>
+
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                data-bs-target="#delete-apartment-modal-{{ $apartment->id }}">
+                DELATE
+            </button>
+
+        </div>
         <div class="row g-3">
+
             <div class="col-12 col-lg-4">
 
                 @if ($apartment->cover_img)
@@ -79,3 +95,35 @@
 
     </div>
 @endsection
+
+{{-- ! FORM + MODAL PER CANCELLARE --}}
+
+@section('modals')
+    <div class="modal fade" id="delete-apartment-modal-{{ $apartment->id }}" tabindex="-1"
+        aria-labelledby="delete-apartment-modal-{{ $apartment->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm deletion
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you want to delete apartment "{{ $apartment->title }}"?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+{{-- ! --}}
