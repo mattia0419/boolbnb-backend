@@ -7,13 +7,13 @@
 
         <form action="{{ route('admin.apartments.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
             @csrf
-            
+
             <div class="col-12">
                 <label for="title">
                     Title *
                 </label>
-                <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror"
-                    value="{{ old('title') }}">
+                <input type="text" name="title" id="title"
+                    class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -99,9 +99,10 @@
                 <div class="col-2 d-flex">
                     @foreach ($services as $service)
                         <div class="col-12">
-                        <input type="checkbox" name="services[]" id="service-{{ $service->id }}"
-                            value="{{ $service->id }}" class="form-check-control @error('services') is-invalid @enderror"
-                            @if (in_array($service->id, old('services') ?? [])) checked @endif>
+                            <input type="checkbox" name="services[]" id="service-{{ $service->id }}"
+                                value="{{ $service->id }}"
+                                class="form-check-control @error('services') is-invalid @enderror"
+                                @if (in_array($service->id, old('services') ?? [])) checked @endif>
                             <label for="service-{{ $service->id }}">{{ $service->label }}</label>
                             @error('services')
                                 <div class="invalid-feedback">
@@ -109,7 +110,7 @@
                                 </div>
                             @enderror
                         </div>
-                        @endforeach
+                    @endforeach
                 </div>
             </div>
             <div class="col-12">
@@ -138,4 +139,14 @@
             </div>
         </form>
     </div>
+@endsection
+@section('scripts')
+    <script type="text/javascript">
+        const inputFileElement = document.getElementById('cover_img');
+        const coverImagePreview = document.getElementById('cover_image_preview');
+        inputFileElement.addEventListener('change', function() {
+            const [file] = this.files;
+            coverImagePreview.src = URL.createObjectURL(file);
+        })
+    </script>
 @endsection

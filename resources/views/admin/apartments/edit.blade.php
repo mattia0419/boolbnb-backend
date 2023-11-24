@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="my-3">Editing apartment: {{$apartment->title}}</h1>
+        <h1 class="my-3">Editing apartment: {{ $apartment->title }}</h1>
         <h6 class="mb-4" style="font-style: italic">Fields with * are required</h6>
 
         <form action="{{ route('admin.apartments.update', $apartment) }}" method="POST" class="row g-3"
@@ -14,8 +14,8 @@
                 <label for="title">
                     Title *
                 </label>
-                <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror"
-                    value="{{ old('title', $apartment->title) }}">
+                <input type="text" name="title" id="title"
+                    class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $apartment->title) }}">
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -105,9 +105,10 @@
                 <div class="col-2 d-flex">
                     @foreach ($services as $service)
                         <div class="col-12">
-                        <input type="checkbox" name="services[]" id="service-{{ $service->id }}"
-                            value="{{ $service->id }}" class="form-check-control @error('services') is-invalid @enderror"
-                            @if (in_array($service->id, old('services') ?? $service_ids)) checked @endif>
+                            <input type="checkbox" name="services[]" id="service-{{ $service->id }}"
+                                value="{{ $service->id }}"
+                                class="form-check-control @error('services') is-invalid @enderror"
+                                @if (in_array($service->id, old('services') ?? $service_ids)) checked @endif>
                             <label for="service-{{ $service->id }}">{{ $service->label }}</label>
                             @error('services')
                                 <div class="invalid-feedback">
@@ -115,21 +116,24 @@
                                 </div>
                             @enderror
                         </div>
-                        @endforeach
+                    @endforeach
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-6">
                 <label for="cover_img">
                     Cover image *
                 </label>
                 <input type="file" name="cover_img" id="cover_img"
-                    class="form-control @error('cover_img') is-invalid @enderror"
-                    value="{{ old('cover_img', $apartment->cover_img) }}">
+                    class="form-control @error('cover_img') is-invalid @enderror" value="{{ old('cover_img') }}">
                 @error('cover_img')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
+            </div>
+            <div class="col-6">
+                <img src="{{ asset('/storage/' . $apartment->cover_img) }}" alt="" class="img-fluid"
+                    id="cover_image_preview">
             </div>
             <div class="col-12">
                 <label for="visible">
@@ -145,4 +149,14 @@
             </div>
         </form>
     </div>
+@endsection
+@section('scripts')
+    <script type="text/javascript">
+        const inputFileElement = document.getElementById('cover_img');
+        const coverImagePreview = document.getElementById('cover_image_preview');
+        inputFileElement.addEventListener('change', function() {
+            const [file] = this.files;
+            coverImagePreview.src = URL.createObjectURL(file);
+        })
+    </script>
 @endsection
