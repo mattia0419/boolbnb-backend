@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-  public function index()
+  public function index(Apartment $apartment)
   {
     $title = "Homepage";
-    return view('guest.home', compact('title'));
+    $apartments = Apartment::paginate(10);
+    return view('guest.home', compact('title', 'apartments'));
   }
 }

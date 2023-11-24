@@ -13,6 +13,7 @@
 
             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                 data-bs-target="#delete-apartment-modal-{{ $apartment->id }}">
+                <i class="fa-regular fa-trash-can me-2"></i>
                 DELATE
             </button>
 
@@ -82,10 +83,12 @@
                 </p>
             </div>
             <div class="col-12">
+
                 <hr>
                 <div class="row row-cols-1 row-cols-md-2">
                     @foreach ($apartment->services as $service)
-                        <p>
+                        <p class="icon-link">
+                            <i class="{{ $service->icon }} me-2 bi"></i>
                             {{ $service->label }}
                         </p>
                     @endforeach

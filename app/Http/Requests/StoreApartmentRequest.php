@@ -35,7 +35,14 @@ class StoreApartmentRequest extends FormRequest
             "price" => ["nullable"],
             "visible" => ["required", "boolean"],
             "cover_img" => ["required", "image"],
-            "services" => ["nullable", "exists:services,id"]
+            "services" => ["required", "min:1", "exists:services,id"],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            "services.required" => "Choose at least one.",
         ];
     }
 }
