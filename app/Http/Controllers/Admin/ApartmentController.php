@@ -66,20 +66,22 @@ class ApartmentController extends Controller
             $apartment->services()->attach($data["services"]);
         }
 
-        $client = new Client(['verify' => false]);
-        $address = urlencode($apartment->address);
+        if ($apartment->address) {
+            $client = new Client(['verify' => false]);
+            $address = urlencode($apartment->address);
 
-        $response = $client->get('https://api.tomtom.com/search/2/geocode/' . $address . '.json', [
-            'query' => [
-                'key' => 'EoW1gArKxlBBEKl68AZm1uhfhcLougV4',
-            ],
-        ]);
-        error_log(print_r($response, true));
-        $data = json_decode($response->getBody(), true);
-        $apartment->latitude = $data['results'][0]['position']['lat'];
-        $apartment->longitude = $data['results'][0]['position']['lon'];
+            $response = $client->get('https://api.tomtom.com/search/2/geocode/' . $address . '.json', [
+                'query' => [
+                    'key' => 'EoW1gArKxlBBEKl68AZm1uhfhcLougV4',
+                ],
+            ]);
+            error_log(print_r($response, true));
+            $data = json_decode($response->getBody(), true);
+            $apartment->latitude = $data['results'][0]['position']['lat'];
+            $apartment->longitude = $data['results'][0]['position']['lon'];
 
-        $apartment->save();
+            $apartment->save();
+        }
 
 
         return redirect()->route("admin.apartments.index", $apartment);
@@ -134,19 +136,28 @@ class ApartmentController extends Controller
             $apartment->services()->sync($data["services"]);
         }
 
-        $client = new Client(['verify' => false]);
-        $address = urlencode($apartment->address);
+        if ($apartment->address) {
+            $client = new Client(['verify' => false]);
+            $address = urlencode($apartment->address);
 
-        $response = $client->get('https://api.tomtom.com/search/2/geocode/' . $address . '.json', [
-            'query' => [
-                'key' => 'EoW1gArKxlBBEKl68AZm1uhfhcLougV4',
-            ],
-        ]);
-        error_log(print_r($response, true));  // * <--
-        $data = json_decode($response->getBody(), true);
-        $apartment->latitude = $data['results'][0]['position']['lat'];
-        $apartment->longitude = $data['results'][0]['position']['lon'];
-        $apartment->save();
+            $response = $client->get('https://api.tomtom.com/search/2/geocode/' . $address . '.json', [
+                'query' => [
+                    'key' => 'EoW1gArKxlBBEKl68AZm1uhfhcLougV4',
+                ],
+            ]);
+            error_log(print_r($response, true));  // * <--
+            $data = json_decode($response->getBody(), true);
+            $apartment->latitude = $data['results'][0]['position']['lat'];
+            $apartment->longitude = $data['results'][0]['position']['lon'];
+            $apartment->save();
+        }
+
+        if (!$apartment->address) {
+            $apartment->latitude = null;
+            $apartment->longitude = null;
+
+            $apartment->save();
+        }
 
         return redirect()->route("admin.apartments.show", compact("apartment"));
         //# *
