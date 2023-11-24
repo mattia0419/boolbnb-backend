@@ -27,6 +27,7 @@ return new class extends Migration
             $table->boolean('visible')->default(false);
             $table->text('cover_img');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -38,5 +39,11 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('apartments');
+
+
+        // Schema::table('apartments', function (Blueprint $table){
+        //     $table->dropSoftDeletes();
+
+        // });
     }
 };
