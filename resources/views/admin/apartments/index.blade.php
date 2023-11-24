@@ -12,7 +12,7 @@
         </div>
         <div class="row row-cols-lg-4 row-cols-1 g-4 ">
 
-            @foreach ($apartments as $apartment)
+            @forelse ($apartments as $apartment)
                 <div class="col">
                     <a href="{{ route('admin.apartments.show', $apartment) }}" class=" text-decoration-none text-dark">
                         <div class="card h-100 text-center">
@@ -61,14 +61,16 @@
                                 <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                                     data-bs-target="#delete-apartment-modal-{{ $apartment->id }}">
                                     <i class="fa-regular fa-trash-can me-2"></i>
-                                    DELATE
+                                    DELETE
                                 </button>
 
                             </div>
                         </div>
                     </a>
                 </div>
-            @endforeach
+                @empty
+                <h2>No apartments.</h2>
+            @endforelse
         </div>
 
     </div>
