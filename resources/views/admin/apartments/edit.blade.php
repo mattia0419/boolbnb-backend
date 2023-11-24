@@ -107,7 +107,7 @@
                         <div class="col-12">
                         <input type="checkbox" name="services[]" id="service-{{ $service->id }}"
                             value="{{ $service->id }}" class="form-check-control @error('services') is-invalid @enderror"
-                            @if (in_array($service->id, old('services') ?? [])) checked @endif>
+                            @if (in_array($service->id, old('services') ?? $service_ids)) checked @endif>
                             <label for="service-{{ $service->id }}">{{ $service->label }}</label>
                             @error('services')
                                 <div class="invalid-feedback">
