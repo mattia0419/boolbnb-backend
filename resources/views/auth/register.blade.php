@@ -12,13 +12,15 @@
                             @csrf
 
                             <div class="mb-4 row">
+                                <h6 class="mb-4" style="font-style: italic">Fields with * are required</h6>
+
                                 <label for="first_name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('first name') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('First name') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="first_name" type="text"
                                         class="form-control @error('first_name') is-invalid @enderror" name="first_name"
-                                        value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+                                        value="{{ old('first_name') }}" autocomplete="first_name" autofocus>
 
                                     @error('first_name')
                                         <span class="invalid-feedback" role="alert">
@@ -29,12 +31,12 @@
                             </div>
                             <div class="mb-4 row">
                                 <label for="last_name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('last name') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Last name') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="last_name" type="text"
                                         class="form-control @error('last_name') is-invalid @enderror" name="last_name"
-                                        value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
+                                        value="{{ old('last_name') }}" autocomplete="last_name" autofocus>
 
                                     @error('last_name')
                                         <span class="invalid-feedback" role="alert">
@@ -45,7 +47,7 @@
                             </div>
                             <div class="mb-4 row">
                                 <label for="date_of_birth"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('date of birth') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Date of birth') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="date_of_birth" type="date"
@@ -63,7 +65,7 @@
 
                             <div class="mb-4 row">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -80,7 +82,7 @@
 
                             <div class="mb-4 row">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -97,7 +99,7 @@
 
                             <div class="mb-4 row">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
