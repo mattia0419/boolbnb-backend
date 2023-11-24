@@ -24,7 +24,7 @@
                 <label for="rooms">
                     Rooms
                 </label>
-                <input type="number" name="rooms" id="rooms" max="100" min="1"
+                <input type="number" name="rooms" id="rooms" max="999" min="1"
                     class="form-control @error('rooms') is-invalid @enderror" value="{{ old('rooms') }}">
                 @error('rooms')
                     <div class="invalid-feedback">
@@ -36,7 +36,7 @@
                 <label for="beds">
                     Beds
                 </label>
-                <input type="number" name="beds" id="beds" max="100" min="0"
+                <input type="number" name="beds" id="beds" max="999" min="0"
                     class="form-control @error('beds') is-invalid @enderror" value="{{ old('beds') }}">
                 @error('beds')
                     <div class="invalid-feedback">
@@ -48,7 +48,7 @@
                 <label for="bathrooms">
                     Bathrooms
                 </label>
-                <input type="number" name="bathrooms" id="bathrooms" max="10" min="1"
+                <input type="number" name="bathrooms" id="bathrooms" max="999" min="1"
                     class="form-control @error('bathrooms') is-invalid @enderror" value="{{ old('bathrooms') }}">
                 @error('bathrooms')
                     <div class="invalid-feedback">
