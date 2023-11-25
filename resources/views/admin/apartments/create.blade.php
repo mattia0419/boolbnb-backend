@@ -113,7 +113,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-6">
                 <label for="cover_img">
                     Cover image *
                 </label>
@@ -124,6 +124,9 @@
                         {{ $message }}
                     </div>
                 @enderror
+            </div>
+            <div class="col-6">
+                <img src="" alt="" class="img-fluid" id="cover_image_preview">
             </div>
             <div class="col-12">
                 <label for="visible">
