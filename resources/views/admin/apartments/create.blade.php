@@ -1,5 +1,18 @@
 @extends('layouts.app')
 
+@section('cdn')
+
+{{-- tom tom searchbox cdn --}}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox.css"
+/>
+<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox-web.js"></script>
+<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.1.2-public-preview.15/services/services-web.min.js"></script>
+
+@endsection
+
 @section('content')
     <div class="container">
         <h1 class="my-3">Add apartment</h1>
@@ -68,12 +81,12 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-12">
+            <div class="col-12" id="address-div">
                 <label for="address">
                     Address
                 </label>
-                <input type="text" name="address" id="address"
-                    class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}">
+                {{-- <input type="text" name="address" id="address"
+                    class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}"> --}}
                 @error('address')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -143,13 +156,41 @@
         </form>
     </div>
 @endsection
+
 @section('scripts')
     <script type="text/javascript">
+        // preview img
         const inputFileElement = document.getElementById('cover_img');
         const coverImagePreview = document.getElementById('cover_image_preview');
         inputFileElement.addEventListener('change', function() {
             const [file] = this.files;
             coverImagePreview.src = URL.createObjectURL(file);
         })
+
+        // tom tom searchbox
+        let options = {
+            searchOptions: {
+                key: "EoW1gArKxlBBEKl68AZm1uhfhcLougV4",
+                language: "en-GB",
+                limit: 5,
+                countrySet: "IT",
+            },
+            autocompleteOptions: {
+                key: "EoW1gArKxlBBEKl68AZm1uhfhcLougV4",
+                language: "en-GB",
+                
+            },
+        }
+
+        let ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
+        let searchBoxHTML = ttSearchBox.getSearchBoxHTML()
+
+        const addressDiv = document.getElementById('address-div')
+        addressDiv.appendChild(searchBoxHTML)
+
+        const searchboxInput = document.getElementsByTagName("input")[7];
+
+        searchboxInput.setAttribute('id', 'address');
+        searchboxInput.setAttribute('name', 'address');
     </script>
 @endsection
