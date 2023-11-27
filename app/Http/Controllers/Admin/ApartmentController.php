@@ -92,11 +92,16 @@ class ApartmentController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * *@return \Illuminate\Http\Response
      */
     public function show(Apartment $apartment)
     {
-        return view('admin.apartments.show', compact('apartment'));
+        $user = Auth::user();
+        if ($apartment->user_id == $user->id) {
+            return view('admin.apartments.show', compact('apartment'));
+        } else {
+            abort(403);
+        }
     }
 
     /**
