@@ -107,9 +107,15 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        $services = Service::all();
-        $service_ids = $apartment->services->pluck('id')->toArray();
-        return view('admin.apartments.edit', compact('apartment', 'services', 'service_ids'));
+        $user = Auth::user();
+        if ($apartment->user_id == $user->id) {
+            $services = Service::all();
+            $service_ids = $apartment->services->pluck('id')->toArray();
+            return view('admin.apartments.edit', compact('apartment', 'services', 'service_ids'));
+        } else {
+            abort(403);
+        }
+
     }
 
     /**
