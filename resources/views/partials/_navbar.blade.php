@@ -9,8 +9,9 @@
             <ul class="navbar-nav me-auto mt-2 mt-lg-0">
                 <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'guest.home' ? 'active' : '' }}"
-                        href="{{ route('guest.home') }}" aria-current="page">Home<span
+                        href="http://localhost:5174/" aria-current="page">Home<span
                             class="visually-hidden">(current)</span></a>
+                            {{-- {{ route('guest.home') }} --}}
                 </li>
 
                 @guest
