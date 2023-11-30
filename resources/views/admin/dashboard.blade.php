@@ -18,10 +18,16 @@
                         @endif
 
                         {{ __('You are logged in!') }}
-                        <div class="my-3">
-                            <a class="btn btn-primary" href="{{ route('admin.apartments.index') }}">My Apartments</a>
-                        </div>
 
+                        @if($apartments->isEmpty())
+                        <div class="div">
+                            <a class="btn btn-primary my-3" href="{{ route('admin.apartments.create') }}">Create your first apartment</a>
+                        </div>
+                        @else
+                        <div class="my-3">
+                            <a class="btn btn-primary my-3" href="{{ route('admin.apartments.index') }}">My Apartments</a>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
