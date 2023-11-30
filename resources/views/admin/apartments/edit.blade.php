@@ -200,6 +200,7 @@
         searchboxInput.setAttribute('id', 'address');
         searchboxInput.setAttribute('name', 'address');
         searchboxInput.setAttribute('value', '{{ old("address", $apartment->address) }}');
+        searchboxInput.setAttribute('class', 'form-control @error("address") is-invalid @enderror');
 
     </script>
 @endsection
