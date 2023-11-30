@@ -192,5 +192,6 @@
 
         searchboxInput.setAttribute('id', 'address');
         searchboxInput.setAttribute('name', 'address');
+        searchboxInput.setAttribute('value', '{{ old("address") }}');
     </script>
 @endsection
