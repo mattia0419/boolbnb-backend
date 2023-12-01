@@ -39,7 +39,9 @@ class ApartmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $apartment = Apartment::where('id', $id)->with('services')->first();
+        $apartment->cover_img = $apartment->getUrlImag();
+        return response()->json($apartment);
     }
 
     /**

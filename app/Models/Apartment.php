@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Apartment extends Model
 {
@@ -32,5 +33,9 @@ class Apartment extends Model
     public function services()
     {
         return $this->belongsToMany(Service::class);
+    }
+    public function getUrlImag()
+    {
+        return $this->cover_img = Storage::url($this->cover_img);
     }
 }
