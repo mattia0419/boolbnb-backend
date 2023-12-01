@@ -30,8 +30,6 @@ class StoreApartmentRequest extends FormRequest
             "bathrooms" => ["required", "integer"],
             "square_meters" => ["required", "integer"],
             "address" => ["required", "string"],
-            // "longitude" => ["required"],
-            // "latitude" => ["required"],
             "price" => ["required"],
             "visible" => ["required", "boolean"],
             "cover_img" => ["required", "image"],
