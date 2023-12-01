@@ -15,7 +15,7 @@
         <h1 class="my-3">Editing apartment: {{ $apartment->title }}</h1>
         <h6 class="mb-4" style="font-style: italic">Fields with * are required</h6>
 
-        <form action="{{ route('admin.apartments.update', $apartment) }}" method="POST" class="row g-3"
+        <form action="{{ route('admin.apartments.update', $apartment) }}" method="POST" class="row g-3" id="edit-form"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -216,6 +216,8 @@
 
             // client-side validation
         function validate() {
+            let editForm = document.getElementById('edit-form');
+
             let title = document.getElementById('title').value;
             let rooms = document.getElementById('rooms').value;
             let beds = document.getElementById('beds').value;
@@ -292,6 +294,8 @@
                 }
                 
                 return false;
+            } else {
+                editForm.submit();
             }
             
         }

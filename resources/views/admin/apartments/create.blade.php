@@ -15,7 +15,7 @@
         <h1 class="my-3">Add apartment</h1>
         <h6 class="mb-4" style="font-style: italic">Fields with * are required</h6>
 
-        <form action="{{ route('admin.apartments.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
+        <form action="{{ route('admin.apartments.store') }}" method="POST" class="row g-3" enctype="multipart/form-data" id="create-form">
             @csrf
 
             <div class="col-12">
@@ -214,6 +214,8 @@
 
         // client-side validation
         function validate() {
+            let createForm = document.getElementById('create-form')
+
             let title = document.getElementById('title').value;
             let rooms = document.getElementById('rooms').value;
             let beds = document.getElementById('beds').value;
@@ -291,6 +293,8 @@
                 }
                 
                 return false;
+            } else {
+                createForm.submit();
             }
             
         }        
