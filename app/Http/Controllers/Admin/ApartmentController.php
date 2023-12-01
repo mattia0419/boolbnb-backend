@@ -85,7 +85,6 @@ class ApartmentController extends Controller
 
 
         return redirect()->route("admin.apartments.index", $apartment);
-
     }
 
     /**
@@ -101,7 +100,10 @@ class ApartmentController extends Controller
             return view('admin.apartments.show', compact('apartment'));
         } else {
             abort(403);
-        }
+        };
+        if (empty($apartment->id)) {
+            abort(403);
+        };
     }
 
     /**
@@ -120,7 +122,6 @@ class ApartmentController extends Controller
         } else {
             abort(403);
         }
-
     }
 
     /**
@@ -195,6 +196,5 @@ class ApartmentController extends Controller
         }
         $apartment->delete();
         return redirect()->route('admin.apartments.index');
-
     }
 }
