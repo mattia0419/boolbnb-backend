@@ -1,16 +1,13 @@
 @extends('layouts.app')
 
 @section('cdn')
-
-{{-- tom tom searchbox cdn --}}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox.css"
-/>
-<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox-web.js"></script>
-<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.1.2-public-preview.15/services/services-web.min.js"></script>
-
+    {{-- tom tom searchbox cdn --}}
+    <link rel="stylesheet" type="text/css"
+        href="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox.css" />
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox-web.js">
+    </script>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.1.2-public-preview.15/services/services-web.min.js">
+    </script>
 @endsection
 
 @section('content')
@@ -35,7 +32,7 @@
             </div>
             <div class="col-12">
                 <label for="rooms">
-                    Rooms
+                    Rooms *
                 </label>
                 <input type="number" name="rooms" id="rooms" max="999" min="1"
                     class="form-control @error('rooms') is-invalid @enderror" value="{{ old('rooms') }}">
@@ -47,7 +44,7 @@
             </div>
             <div class="col-12">
                 <label for="beds">
-                    Beds
+                    Beds *
                 </label>
                 <input type="number" name="beds" id="beds" max="999" min="0"
                     class="form-control @error('beds') is-invalid @enderror" value="{{ old('beds') }}">
@@ -59,7 +56,7 @@
             </div>
             <div class="col-12">
                 <label for="bathrooms">
-                    Bathrooms
+                    Bathrooms *
                 </label>
                 <input type="number" name="bathrooms" id="bathrooms" max="999" min="1"
                     class="form-control @error('bathrooms') is-invalid @enderror" value="{{ old('bathrooms') }}">
@@ -71,7 +68,7 @@
             </div>
             <div class="col-12">
                 <label for="square_meters">
-                    Square Meters
+                    Square Meters *
                 </label>
                 <input type="number" name="square_meters" id="square_meters"
                     class="form-control @error('square_meters') is-invalid @enderror" value="{{ old('square_meters') }}">
@@ -83,7 +80,7 @@
             </div>
             <div class="col-12" id="address-div">
                 <label for="address">
-                    Address
+                    Address *
                 </label>
                 {{-- <input type="text" name="address" id="address"
                     class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}"> --}}
@@ -95,7 +92,7 @@
             </div>
             <div class="col-12">
                 <label for="price">
-                    Price
+                    Price *
                 </label>
                 <input type="number" name="price" id="price"
                     class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}" step="0.01">
@@ -178,7 +175,7 @@
             autocompleteOptions: {
                 key: "EoW1gArKxlBBEKl68AZm1uhfhcLougV4",
                 language: "en-GB",
-                
+
             },
         }
 
@@ -192,7 +189,9 @@
 
         searchboxInput.setAttribute('id', 'address');
         searchboxInput.setAttribute('name', 'address');
-        searchboxInput.setAttribute('value', '{{ old("address") }}');
-        searchboxInput.setAttribute('class', 'form-control @error("address") is-invalid @enderror');
+        searchboxInput.setAttribute('value', '{{ old('address') }}');
+        searchboxInput.setAttribute('class',
+            'form-control @error('address') is-invalid @enderror'
+            );
     </script>
 @endsection
