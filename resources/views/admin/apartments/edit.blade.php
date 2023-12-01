@@ -134,7 +134,7 @@
             </div>
             <div class="col-6">
                 <label for="cover_img">
-                    Cover image *
+                    Cover image
                 </label>
                 <input type="file" name="cover_img" id="cover_img"
                     class="form-control @error('cover_img') is-invalid @enderror" value="{{ old('cover_img') }}">
@@ -200,6 +200,7 @@
         searchboxInput.setAttribute('id', 'address');
         searchboxInput.setAttribute('name', 'address');
         searchboxInput.setAttribute('value', '{{ old("address", $apartment->address) }}');
+        searchboxInput.setAttribute('class', 'form-control @error("address") is-invalid @enderror');
 
     </script>
 @endsection
