@@ -4,10 +4,9 @@
     <div class="container mt-5">
         <h1 class="mb-4">Apartments - {{ $user->first_name }}</h1>
         <div class="d-flex justify-content-between mb-3">
-            <h6 class="text-secondary align-self-end">Clicca sulle card per maggiori informazioni</h6>
+            <h6 class="text-secondary align-self-end">Click on cards for more details</h6>
             <a href="{{ route('admin.apartments.create') }}" class="btn btn-primary">
-                <i class="fa-solid fa-plus me-2"></i>
-                INSERISCI
+                <i class="fa-solid fa-plus me-2"></i>CREATE
             </a>
         </div>
         <div class="row row-cols-lg-4 row-cols-1 g-4 ">
@@ -19,7 +18,7 @@
                             <div class="card-image">
                                 @if ($apartment->cover_img)
                                     <img src="{{ asset('/storage/' . $apartment->cover_img) }}" alt=""
-                                        class="image-fluid w-100">
+                                        class="img-fluid w-100">
                                 @else
                                     <img src="https://placehold.co/400" alt="" class="image-fluid w-100">
                                 @endif
@@ -85,12 +84,12 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">DELETING
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Do you want to delete apartment "{{ $apartment->title }}"?
+                        Are you sure you want to delete "{{ $apartment->title }}"?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

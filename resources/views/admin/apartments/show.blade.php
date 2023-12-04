@@ -14,7 +14,7 @@
             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                 data-bs-target="#delete-apartment-modal-{{ $apartment->id }}">
                 <i class="fa-regular fa-trash-can me-2"></i>
-                DELATE
+                DELETE
             </button>
 
         </div>
@@ -32,7 +32,7 @@
             <div class="col-12 col-lg-8 text-center text-lg-start d-flex flex-column justify-content-between">
                 <h1>{{ $apartment->title }}</h1>
                 <p>
-                    <strong>Camere : </strong>
+                    <strong>Rooms: </strong>
                     @if ($apartment->rooms)
                         {{ $apartment->rooms }}
                     @else
@@ -40,7 +40,7 @@
                     @endif
                 </p>
                 <p>
-                    <strong>Letti : </strong>
+                    <strong>Beds: </strong>
 
                     @if ($apartment->beds)
                         {{ $apartment->beds }}
@@ -49,7 +49,7 @@
                     @endif
                 </p>
                 <p>
-                    <strong>Bagni : </strong>
+                    <strong>Bathrooms: </strong>
 
                     @if ($apartment->bathrooms)
                         {{ $apartment->bathrooms }}
@@ -58,7 +58,7 @@
                     @endif
                 </p>
                 <p>
-                    <strong>Metri Quadrati : </strong>
+                    <strong>Square meters: </strong>
                     @if ($apartment->square_meters)
                         {{ $apartment->square_meters }}
                     @else
@@ -66,7 +66,7 @@
                     @endif
                 </p>
                 <p>
-                    <strong>Indirizzo : </strong>
+                    <strong>Address: </strong>
                     @if ($apartment->address)
                         {{ $apartment->address }}
                     @else
@@ -74,7 +74,7 @@
                     @endif
                 </p>
                 <p class="m-0">
-                    <strong>Prezzo Per Notte : </strong>
+                    <strong>Price per day: </strong>
                     @if ($apartment->price)
                         {{ $apartment->price }} €
                     @else
