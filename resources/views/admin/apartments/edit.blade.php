@@ -163,8 +163,8 @@
                     Visible *
                 </label>
                 <select name="visible" id="visible" class="form-select w-25">
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
+                    <option value="0" {{old('visible', $apartment->visible) == 0 ? 'selected' : ''}}>No</option>
+                    <option value="1" {{old('visible', $apartment->visible) == 1 ? 'selected' : ''}}>Yes</option>
                 </select>
             </div>
             <div class="col-4">
