@@ -26,13 +26,14 @@
                 @else
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteName() == 'guest.home' ? 'active' : '' }}"
-                            href="{{ route('admin.apartments.index') }}" aria-current="page">Appartamenti<span
+                            href="{{ route('admin.apartments.index') }}" aria-current="page">Apartments<span
                                 class="visually-hidden">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
+                        
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->email }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

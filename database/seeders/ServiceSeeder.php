@@ -18,7 +18,7 @@ class ServiceSeeder extends Seeder
     $_services = [
 
       [
-        "label" => "Cucina",
+        "label" => "Kitchen",
         "icon" => "fa-solid fa-utensils",
         "id" => "1",
       ],
@@ -28,12 +28,12 @@ class ServiceSeeder extends Seeder
         "id" => "2",
       ],
       [
-        "label" => "Posto Macchina",
+        "label" => "Parking Spot",
         "icon" => "fa-solid fa-car",
         "id" => "3",
       ],
       [
-        "label" => "Piscina",
+        "label" => "Swimming Pool",
         "icon" => "fa-solid fa-water-ladder",
         "id" => "4",
       ],
@@ -43,7 +43,7 @@ class ServiceSeeder extends Seeder
         "id" => "5",
       ],
       [
-        "label" => "Vista Mare",
+        "label" => "Sea View",
         "icon" => "fa-solid fa-water",
         "id" => "6",
       ],
