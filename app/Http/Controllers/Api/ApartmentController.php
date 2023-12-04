@@ -16,7 +16,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::with('services')->paginate(8);
+        $apartments = Apartment::with('services')->where('visible', '=', 1)->paginate(8);
         return response()->json($apartments);
     }
 
@@ -39,9 +39,11 @@ class ApartmentController extends Controller
      */
     public function show($id)
     {
+
         $apartment = Apartment::where('id', $id)->with('services')->first();
         $apartment->cover_img = $apartment->getUrlImag();
         return response()->json($apartment);
+
     }
 
     /**
