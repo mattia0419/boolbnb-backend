@@ -99,11 +99,14 @@ class ApartmentController extends Controller
         if ($apartment->user_id == $user->id) {
             return view('admin.apartments.show', compact('apartment'));
         } else {
-            abort(403);
-        };
+            abort(404);
+        }
+
+
         if (empty($apartment->id)) {
-            abort(403);
-        };
+            abort(404);
+        }
+
     }
 
     /**
@@ -120,7 +123,7 @@ class ApartmentController extends Controller
             $service_ids = $apartment->services->pluck('id')->toArray();
             return view('admin.apartments.edit', compact('apartment', 'services', 'service_ids'));
         } else {
-            abort(403);
+            abort(404);
         }
     }
 
