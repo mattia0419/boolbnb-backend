@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MessageController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\ApartmentController;
@@ -27,7 +28,8 @@ Route::middleware(['auth', 'verified'])
 
     Route::get('/', [AdminPageController::class, 'index'])->name('home');
     Route::resource('apartments', ApartmentController::class);
+    Route::resource('messages', MessageController::class);
 
   });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

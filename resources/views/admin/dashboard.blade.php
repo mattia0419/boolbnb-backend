@@ -26,6 +26,7 @@
                         @else
                         <div class="my-3">
                             <a class="btn btn-primary my-3" href="{{ route('admin.apartments.index') }}">My Apartments</a>
+                            <a class="btn btn-primary my-3" href="{{ route('admin.messages.index') }}">My Messages</a>
                         </div>
                         @endif
                     </div>

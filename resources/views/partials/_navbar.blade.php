@@ -25,8 +25,13 @@
                     @endif
                 @else
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::currentRouteName() == 'guest.home' ? 'active' : '' }}"
+                        <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' ? 'active' : '' }}"
                             href="{{ route('admin.apartments.index') }}" aria-current="page">Apartments<span
+                                class="visually-hidden">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteName() == 'admin.messages.index' ? 'active' : '' }}"
+                            href="{{ route('admin.messages.index') }}" aria-current="page">Messages<span
                                 class="visually-hidden">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
