@@ -12,11 +12,10 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('sponsorships', function (Blueprint $table) {
+        Schema::create('apartment_sponsorship', function (Blueprint $table) {
             $table->id();
-            $table->string('label');
-            $table->decimal('price', 12, 2)->unsigned();
-            $table->integer('duration')->unsigned();
+            $table->foreignId('apartment_id')->nullOnDelete()->constrained();
+            $table->foreignId('sponsorship_id')->nullOnDelete()->constrained();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('sponsorships');
+        Schema::dropIfExists('apartment_sponsorship');
     }
 };

@@ -17,17 +17,17 @@ class SponsorshipSeeder extends Seeder
     {
         $_sponsorships = [
             [
-                "label" => "A",
+                "label" => "Basic",
                 "price" => 2.99,
                 "duration" => 24
             ],
             [
-                "label" => "B",
+                "label" => "Gold",
                 "price" => 5.99,
                 "duration" => 72
             ],
             [
-                "label" => "C",
+                "label" => "Platinum",
                 "price" => 9.99,
                 "duration" => 144
             ],

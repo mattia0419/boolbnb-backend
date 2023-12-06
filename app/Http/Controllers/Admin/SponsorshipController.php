@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 
@@ -10,11 +11,12 @@ class SponsorshipController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     ** @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $sponsorships = Sponsorship::all();
+        return view("admin.sponsorships.index", compact("sponsorships"));
     }
 
     /**
@@ -41,10 +43,10 @@ class SponsorshipController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Sponsorship  $sponsorship
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Sponsorship $sponsorship)
+    public function show($id)
     {
         //
     }
@@ -52,10 +54,10 @@ class SponsorshipController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Sponsorship  $sponsorship
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sponsorship $sponsorship)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +66,10 @@ class SponsorshipController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sponsorship  $sponsorship
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sponsorship $sponsorship)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +77,10 @@ class SponsorshipController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sponsorship  $sponsorship
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sponsorship $sponsorship)
+    public function destroy($id)
     {
         //
     }
