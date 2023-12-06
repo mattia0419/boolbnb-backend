@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('cdn')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
+@endsection
+
 @section('content')
     <div class="container mt-5">
         <div class="my-3 text-end">
@@ -97,6 +103,14 @@
         </div>
 
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div id="dropin-container"></div>
+                <button id="submit-button">Request payment method</button>
+            </div>
+        </div>
+    </div>
 @endsection
 
 {{-- ! FORM + MODAL PER CANCELLARE --}}
@@ -129,4 +143,42 @@
     </div>
 @endsection
 
-{{-- ! --}}
+@section('scripts')
+    <script>
+let button = document.querySelector('#submit-button');
+
+braintree.dropin.create({
+    authorization: 'sandbox_zjtkt98n_y45kspkr479qbqqv',
+    selector: '#dropin-container'
+}, function (err, instance) {
+    button.addEventListener('click', function () {
+        instance.requestPaymentMethod(function (err, payload) {
+            // Get the CSRF token from the meta tag
+            let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('admin.payment.make') }}',
+                contentType: 'application/json', // Set the content type to JSON
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the headers
+                },
+                data: JSON.stringify({ payload }),
+                success: function (response) {
+                    console.log(response);
+                    if (response.success) {
+                        alert('Payment successful!');
+                    } else {
+                        alert('Payment failed');
+                    }
+                },
+                error: function (error) {
+                    console.error(error);
+                    // Handle the error
+                }
+            });
+        });
+    });
+});
+    </script>
+@endsection

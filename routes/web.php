@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\ApartmentController;
@@ -27,9 +28,9 @@ Route::middleware(['auth', 'verified'])
   ->group(function () {
 
     Route::get('/', [AdminPageController::class, 'index'])->name('home');
+    Route::post('/payment/make', [PaymentController::class, 'make'])->name('payment.make');
     Route::resource('apartments', ApartmentController::class);
     Route::resource('messages', MessageController::class);
-
   });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
