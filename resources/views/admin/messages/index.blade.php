@@ -3,7 +3,7 @@
 @section('content')
     
 <div class="container">
-    <h2 class="mt-3 mb-5">Your messages</h2>
+    <h2 class="mt-3 mb-5">My Messages</h2>
 
     @php
         $messagesExist = false;
