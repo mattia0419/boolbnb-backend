@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Service;
+use App\Models\Sponsorship;
 use App\Models\User;
 use App\Models\Apartment;
 use App\Http\Controllers\Controller;
@@ -203,12 +204,11 @@ class ApartmentController extends Controller
     public function sponsorize(Request $request)
     {
         $apartment_id = $request->input('apartment-id');
-        $sponsor_id = $request->input('sponsor-id');
-        $sponsor_label = $request->input('sponsor-label');
-        $sponsor_price = $request->input('sponsor-price');
-        $sponsor_duration = $request->input('sponsor-duration');
+        $sponsorship_id = $request->input('sponsor-id');
 
-        $apartmentToSponsor = Apartment::where('id', $apartment_id);
-        return view('admin.apartments.index');
+        $apartment = Apartment::find($apartment_id);
+        $apartment->sponsorships()->attach($sponsorship_id);
+
+        return redirect()->route('admin.apartments.index');
     }
 }
