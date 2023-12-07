@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class ApartmentController extends Controller {
+class ApartmentController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      ** @return \Illuminate\Http\Response
      */
-    public function index(Apartment $apartment) {
+    public function index(Apartment $apartment)
+    {
         $user = Auth::user();
 
         $apartments = Apartment::where('user_id', '=', $user->id)->paginate(10);
@@ -34,7 +36,8 @@ class ApartmentController extends Controller {
      *
     //  * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         $services = Service::all();
         return view('admin.apartments.create', compact('services'));
     }
@@ -45,7 +48,8 @@ class ApartmentController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreApartmentRequest $request) {
+    public function store(StoreApartmentRequest $request)
+    {
         $user = Auth::user();
         $data = $request->validated();
         $apartment = new Apartment();
@@ -57,16 +61,16 @@ class ApartmentController extends Controller {
         $apartment->cover_img = $cover_image_path;
         $apartment->save();
 
-        if(Arr::exists($data, "services")) {
+        if (Arr::exists($data, "services")) {
 
             $apartment->services()->attach($data["services"]);
         }
 
-        if($apartment->address) {
+        if ($apartment->address) {
             $client = new Client(['verify' => false]);
             $address = urlencode($apartment->address);
 
-            $response = $client->get('https://api.tomtom.com/search/2/geocode/'.$address.'.json', [
+            $response = $client->get('https://api.tomtom.com/search/2/geocode/' . $address . '.json', [
                 'query' => [
                     'key' => 'EoW1gArKxlBBEKl68AZm1uhfhcLougV4',
                 ],
@@ -89,16 +93,17 @@ class ApartmentController extends Controller {
      * @param  int  $id
      * *@return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment) {
+    public function show(Apartment $apartment)
+    {
         $user = Auth::user();
-        if($apartment->user_id == $user->id) {
+        if ($apartment->user_id == $user->id) {
             return view('admin.apartments.show', compact('apartment'));
         } else {
             abort(404);
         }
 
 
-        if(empty($apartment->id)) {
+        if (empty($apartment->id)) {
             abort(404);
         }
 
@@ -110,9 +115,10 @@ class ApartmentController extends Controller {
      * @param  int  $id
      ** @return \Illuminate\Http\Response
      */
-    public function edit(Apartment $apartment) {
+    public function edit(Apartment $apartment)
+    {
         $user = Auth::user();
-        if($apartment->user_id == $user->id) {
+        if ($apartment->user_id == $user->id) {
             $services = Service::all();
             $service_ids = $apartment->services->pluck('id')->toArray();
             return view('admin.apartments.edit', compact('apartment', 'services', 'service_ids'));
@@ -128,11 +134,12 @@ class ApartmentController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateApartmentRequest $request, Apartment $apartment) {
+    public function update(UpdateApartmentRequest $request, Apartment $apartment)
+    {
         $data = $request->validated();
         $apartment->update($data);
-        if($request->hasFile('cover_img') && $request->file('cover_img')->isValid()) {
-            if($apartment->cover_img) {
+        if ($request->hasFile('cover_img') && $request->file('cover_img')->isValid()) {
+            if ($apartment->cover_img) {
                 Storage::delete($apartment->cover_img);
             }
 
@@ -140,15 +147,15 @@ class ApartmentController extends Controller {
             $apartment->cover_img = $image_path;
         }
 
-        if(Arr::exists($data, "services")) {
+        if (Arr::exists($data, "services")) {
             $apartment->services()->sync($data["services"]);
         }
 
-        if($apartment->address) {
+        if ($apartment->address) {
             $client = new Client(['verify' => false]);
             $address = urlencode($apartment->address);
 
-            $response = $client->get('https://api.tomtom.com/search/2/geocode/'.$address.'.json', [
+            $response = $client->get('https://api.tomtom.com/search/2/geocode/' . $address . '.json', [
                 'query' => [
                     'key' => 'EoW1gArKxlBBEKl68AZm1uhfhcLougV4',
                 ],
@@ -160,7 +167,7 @@ class ApartmentController extends Controller {
             $apartment->save();
         }
 
-        if(!$apartment->address) {
+        if (!$apartment->address) {
             $apartment->latitude = null;
             $apartment->longitude = null;
 
@@ -184,23 +191,24 @@ class ApartmentController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Apartment $apartment) {
+    public function destroy(Apartment $apartment)
+    {
         $apartment->services()->detach();
-        if($apartment) {
+        if ($apartment) {
             Storage::delete($apartment);
         }
         $apartment->delete();
         return redirect()->route('admin.apartments.index');
     }
-    public function sponsorize(Request $request, Apartment $apartment) {
-        dd($request);
-        // $sponsor_id = $request->input('sponsor-id');
-        // $apartment->sponsorships()->attach($sponsor_id);
-        // $apartment->save();
-        // if(Arr::exists($data, "services")) {
+    public function sponsorize(Request $request)
+    {
+        $apartment_id = $request->input('apartment-id');
+        $sponsor_id = $request->input('sponsor-id');
+        $sponsor_label = $request->input('sponsor-label');
+        $sponsor_price = $request->input('sponsor-price');
+        $sponsor_duration = $request->input('sponsor-duration');
 
-        //     $apartment->services()->attach($data["services"]);
-        // }
-        return view('admin.apartments.index', compact('apartment'));
+        $apartmentToSponsor = Apartment::where('id', $apartment_id);
+        return view('admin.apartments.index');
     }
 }
