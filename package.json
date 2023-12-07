@@ -16,6 +16,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.4.2",
         "@popperjs/core": "^2.11.6",
-        "bootstrap": "^5.2.2"
+        "bootstrap": "^5.2.2",
+        "braintree": "^3.19.0"
     }
 }
