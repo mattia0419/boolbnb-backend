@@ -31,7 +31,8 @@ Route::middleware(['auth', 'verified'])
     Route::resource('apartments', ApartmentController::class);
     Route::resource('messages', MessageController::class);
     Route::resource('sponsorships', SponsorshipController::class);
+    Route::get('/sponsorize', [ApartmentController::class, 'sponsorize'])->name('sponsorize');
 
   });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

@@ -13,7 +13,19 @@
                         <div class="card-body">
                             <p>Your apartment will be sponsored for {{ $sponsorship->duration }}h</p>
                             <p>Price: {{ $sponsorship->price }}€</p>
-                            <button class="btn btn-primary w-25"> <strong>GET</strong> </button>
+                            <p>{{ $apartment->id }}</p>
+                            <form action="{{ route('admin.sponsorize') }}" method="GET">
+                                @csrf
+                                <input type="hidden" value='{{ $apartment->id }}' name="apartment-id">
+                                <input type="hidden" value='{{ $sponsorship->id }}' name="sponsor-id">
+                                <input type="hidden" value='{{ $sponsorship->label }}' name="sponsor-label">
+                                <input type="hidden" value='{{ $sponsorship->price }}' name="sponsor-price">
+                                <input type="hidden" value='{{ $sponsorship->duration }}' name="sponsor-duration">
+                                <button class="btn mx-2 btn-outline-primary" type="submit"
+                                    id="go-to-sponsor-{{ $sponsorship->id }}" key='{{ $sponsorship->price }}'>
+                                    <strong>SPONSORSHIP</strong>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

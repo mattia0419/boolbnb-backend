@@ -62,12 +62,16 @@
                                     <i class="fa-regular fa-trash-can me-2"></i>
                                     DELETE
                                 </button>
+                                <a class="btn mx-2 btn-outline-primary"
+                                    href="{{ route('admin.sponsorships.index', $apartment) }}">
+                                    <i class="fa-solid fa-pen me-2"></i>SPONSORSHIP
+                                </a>
 
                             </div>
                         </div>
                     </a>
                 </div>
-                @empty
+            @empty
                 <h2>No apartments.</h2>
             @endforelse
         </div>
