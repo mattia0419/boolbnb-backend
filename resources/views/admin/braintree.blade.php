@@ -23,37 +23,39 @@
     var button = document.querySelector('#submit-button');
 
         braintree.dropin.create({
-            authorization: '{{$token}}',
+            authorization: 'sandbox_w3xwk6k5_sfy9b33k292325vv',
             container: '#dropin-container'
         }, function (createErr, instance) {
-            button.addEventListener('click', function () {
-                instance.requestPaymentMethod(function (err,payload){
-                    button.addEventListener('click', function () {
-                    instance.requestPaymentMethod(function (err, payload) {
-                (function($) {
-                    $(function() {
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-                        $.ajax({
-                            type: "POST",
-                            url: "{{route('admin.token')}}",
-                            data: {nonce : payload.nonce},
-                            success: function (data) {
-                                console.log('success',payload.nonce)
-                            },
-                            error: function (data) {
-                                console.log('error',payload.nonce)
-                            }
+                button.addEventListener('click', function () {
+                    instance.requestPaymentMethod(function (err,payload){
+                        button.addEventListener('click', function () {
+                            instance.requestPaymentMethod(function (err, payload) {
+                                (function($) {
+                                    $(function() {
+                                        $.ajaxSetup({
+                                                headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                }
+                                        });
+                                        
+                                        $.ajax({
+                                        type: "POST",
+                                        url: "{{route('admin.token')}}",
+                                        data: {nonce : payload.nonce},
+                                        success: function (data) {
+                                            console.log('success',payload.nonce)
+                                        },
+                                        error: function (data) {
+                                            console.log('error',payload.nonce)
+                                        }
+                                        });
+                                    });
+                                })(jQuery);
+                            });
                         });
                     });
-                })(jQuery);
-            });
-        });
-        });
-        });
-        });
+                });
+            }
+        );
 </script>
 @endsection
