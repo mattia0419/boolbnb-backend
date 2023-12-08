@@ -11,7 +11,12 @@ class BraintreeController extends Controller
     public function token(Request $request)
     {
         session_start();
-        dd($_SESSION['name']);
+        // dd($_SESSION);
+        $price = $_SESSION["price"];
+        dd($price);
+        $apartment_id = $_SESSION["apartment_id"];
+        $sponsorship_id = $_SESSION["sponsorship_id"];
+
 
         // $apartment_id = $request->input('apartment-id');
         // $sponsorship_id = $request->input('sponsor-id');
@@ -28,15 +33,15 @@ class BraintreeController extends Controller
             $nonceFromTheClient = $request->input('nonce');
 
             $gateway->transaction()->sale([
-                'amount' => '10.00',
+                'amount' => $price,
                 'paymentMethodNonce' => $nonceFromTheClient,
                 'options' => [
                     'submitForSettlement' => True,
                 ],
             ]);
 
-            // $apartment = Apartment::find($apartment_id);
-            // $apartment->sponsorships()->attach($sponsorship_id);
+            $apartment = Apartment::find($apartment_id);
+            $apartment->sponsorships()->attach($sponsorship_id);
             return view('admin.braintree');
         } else {
 
