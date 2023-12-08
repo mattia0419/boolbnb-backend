@@ -13,7 +13,14 @@
                         <div class="card-body">
                             <p>Your apartment will be sponsored for {{ $sponsorship->duration }}h</p>
                             <p>Price: {{ $sponsorship->price }}€</p>
-                            <form action="{{ route('admin.apartments.sponsorize') }}" method="POST">
+
+                            {{-- @php
+                            $_SESSION['name'] = "Gesualdo";
+                            @endphp --}}
+
+                            {{-- se funziona la sessione, il pulsante deve mandare ad admin.token ma senza inviare gli input --}}
+
+                            <form action="{{ route('admin.token') }}" method="POST">
                                 @csrf
 
                                 <input type="hidden" value='{{ array_key_first($apartment) }}' name="apartment-id">

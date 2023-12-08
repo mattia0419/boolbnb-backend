@@ -201,14 +201,14 @@ class ApartmentController extends Controller
         $apartment->delete();
         return redirect()->route('admin.apartments.index');
     }
-    public function sponsorize(Request $request)
-    {
-        $apartment_id = $request->input('apartment-id');
-        $sponsorship_id = $request->input('sponsor-id');
+    // public function sponsorize(Request $request)
+    // {
+    //     $apartment_id = $request->input('apartment-id');
+    //     $sponsorship_id = $request->input('sponsor-id');
 
-        $apartment = Apartment::find($apartment_id);
-        $apartment->sponsorships()->attach($sponsorship_id);
+    //     $apartment = Apartment::find($apartment_id);
+    //     $apartment->sponsorships()->attach($sponsorship_id);
 
-        return redirect()->route('admin.apartments.index');
-    }
+    //     return redirect()->route('admin.apartments.index');
+    // }
 }
