@@ -31,7 +31,6 @@ Route::middleware(['auth', 'verified'])
     Route::resource('apartments', ApartmentController::class);
     Route::resource('messages', MessageController::class);
     Route::resource('sponsorships', SponsorshipController::class);
-    // Route::get('sponsorships/{apartment}', [SponsorshipController::class, 'index'])->name('sponsorships');
     Route::post('/apartments/sponsorize', [ApartmentController::class, 'sponsorize'])->name('apartments.sponsorize');
 
   });
