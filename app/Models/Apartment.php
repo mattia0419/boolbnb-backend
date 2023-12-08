@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
-class Apartment extends Model {
+class Apartment extends Model
+{
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'title',
@@ -21,19 +22,25 @@ class Apartment extends Model {
         'address',
         'price',
     ];
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-    public function messages() {
+    public function messages()
+    {
         return $this->hasMany(Message::class);
     }
-    public function services() {
+    public function services()
+    {
         return $this->belongsToMany(Service::class);
     }
-    public function sponsorships() {
-        return $this->belongsToMany(Sponsorship::class);
+    public function sponsorships()
+    {
+        return $this->belongsToMany(Sponsorship::class)->withTimestamps();
+        ;
     }
-    public function getUrlImag() {
+    public function getUrlImag()
+    {
         return $this->cover_img = Storage::url($this->cover_img);
     }
 }

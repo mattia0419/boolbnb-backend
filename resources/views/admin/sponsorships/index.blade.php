@@ -13,10 +13,10 @@
                         <div class="card-body">
                             <p>Your apartment will be sponsored for {{ $sponsorship->duration }}h</p>
                             <p>Price: {{ $sponsorship->price }}€</p>
-                            <p>{{ $apartment->id }}</p>
-                            <form action="{{ route('admin.sponsorize') }}" method="GET">
+                            <form action="{{ route('admin.apartments.sponsorize') }}" method="POST">
                                 @csrf
-                                <input type="hidden" value='{{ $apartment->id }}' name="apartment-id">
+
+                                <input type="hidden" value='{{ array_key_first($apartment) }}' name="apartment-id">
                                 <input type="hidden" value='{{ $sponsorship->id }}' name="sponsor-id">
                                 <input type="hidden" value='{{ $sponsorship->label }}' name="sponsor-label">
                                 <input type="hidden" value='{{ $sponsorship->price }}' name="sponsor-price">

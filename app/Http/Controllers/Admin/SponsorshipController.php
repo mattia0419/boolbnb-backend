@@ -7,16 +7,18 @@ use App\Models\Apartment;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 
-class SponsorshipController extends Controller {
+class SponsorshipController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      ** @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Apartment $apartment) {
-        $apartment_id = $request->input('apartment-id');
+    public function index(Request $request)
+    {
+        $apartment = $request->input();
         $sponsorships = Sponsorship::all();
-        return view("admin.sponsorships.index", compact("sponsorships", 'apartment'));
+        return view("admin.sponsorships.index", compact("sponsorships", "apartment"));
     }
 
     /**
@@ -24,7 +26,8 @@ class SponsorshipController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         //
     }
 
@@ -34,7 +37,8 @@ class SponsorshipController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         //
     }
 
@@ -44,7 +48,8 @@ class SponsorshipController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function show($id)
+    {
         //
     }
 
@@ -54,7 +59,8 @@ class SponsorshipController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         //
     }
 
@@ -65,7 +71,8 @@ class SponsorshipController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         //
     }
 
@@ -75,7 +82,8 @@ class SponsorshipController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         //
     }
 
