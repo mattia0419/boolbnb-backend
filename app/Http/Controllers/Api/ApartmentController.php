@@ -16,9 +16,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::with('services')->where('visible', '=', 1)->paginate(8);
+        $apartments = Apartment::with('services', 'sponsorships')->where('visible', '=', 1)->paginate(8);
         return response()->json($apartments);
-
     }
 
     /**

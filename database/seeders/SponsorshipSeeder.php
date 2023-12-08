@@ -19,17 +19,17 @@ class SponsorshipSeeder extends Seeder
             [
                 "label" => "Basic",
                 "price" => 2.99,
-                "duration" => 24
+                "duration" => 1,
             ],
             [
                 "label" => "Gold",
                 "price" => 5.99,
-                "duration" => 72
+                "duration" => 3,
             ],
             [
                 "label" => "Platinum",
                 "price" => 9.99,
-                "duration" => 144
+                "duration" => 6,
             ],
         ];
         foreach ($_sponsorships as $_sponsorship) {
