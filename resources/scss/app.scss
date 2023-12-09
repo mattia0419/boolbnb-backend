@@ -26,3 +26,16 @@
 .tt-search-box {
     margin-top: 0;
 }
+
+.select + label {
+    transition: 0.5s;
+}
+.select + label:hover {
+    background-color: rgba(173, 216, 230, 0.5);
+
+    transform: scale(1.07);
+}
+
+.select:checked + label {
+    background-color: rgba(0, 128, 0, 0.5);
+}

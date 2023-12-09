@@ -10,6 +10,9 @@
     <div class="py-12">
         @csrf
         <div id="dropin-container" style="display: flex;justify-content: center;align-items: center;"></div>
+        <input type="radio" value='2.99' name="price" checked>
+        <input type="radio" value='5.99' name="price">
+        <input type="radio" value='9.99' name="price">
         <div style="display: flex;justify-content: center;align-items: center; color: white">
             <a id="submit-button" class="btn btn-sm btn-success">Submit payment</a>
         </div>
@@ -18,7 +21,7 @@
 
 @section('scripts')
     <script>
-        var button = document.querySelector('#submit-button');
+        let button = document.querySelector('#submit-button');
 
         braintree.dropin.create({
             authorization: 'sandbox_zjtkt98n_y45kspkr479qbqqv',
@@ -38,24 +41,32 @@
                                                 'content')
                                         }
                                     });
+                                    // var test = $('#test').val();
+                                    let price = $(
+                                        'input[name="price"]:checked'
+                                    ).val();
 
                                     $.ajax({
                                         type: "POST",
                                         url: "{{ route('admin.token') }}",
                                         data: {
-                                            nonce: payload.nonce
+                                            nonce: payload
+                                                .nonce,
+                                            price: price
                                         },
                                         success: function(
                                             data) {
 
                                             console.log(
                                                 'success',
+                                                price,
                                                 payload
                                                 .nonce)
                                         },
                                         error: function(data) {
                                             console.log(
                                                 'error',
+                                                price,
                                                 payload
                                                 .nonce)
                                         }
