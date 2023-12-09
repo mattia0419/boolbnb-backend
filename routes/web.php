@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\SponsorshipController;
+use App\Http\Controllers\BraintreeController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\ApartmentController;
@@ -32,6 +33,7 @@ Route::middleware(['auth', 'verified'])
     Route::resource('messages', MessageController::class);
     Route::resource('sponsorships', SponsorshipController::class);
     Route::post('/apartments/sponsorize', [ApartmentController::class, 'sponsorize'])->name('apartments.sponsorize');
+    Route::any('/payment', [BraintreeController::class, 'token'])->name('token');
 
   });
 

@@ -6,38 +6,15 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 @endsection
 
-
 @section('content')
-    <div class="container">
-        <h1 class="my-5">Choose your plan</h1>
-        <div class="row">
-            <div id="prova"></div>
-            <input type="hidden" value='{{ array_key_first($apartment) }}' id="apartment-id">
-            @foreach ($sponsorships as $sponsorship)
-                <div class="col-4">
-                    <input class="d-none select" type="radio" id="{{ $sponsorship->id }}" value='{{ $sponsorship->price }}'
-                        name="price" checked>
-                    <label for="{{ $sponsorship->id }}" class="card text-center">
-                        <div class="card-header">
-                            <h4>{{ $sponsorship->label }}</h4>
-                        </div>
-                        <div class="card-body my-5">
-                            <p class="fs-5">Your apartment will be sponsored for</p>
-                            <p class="fs-1"> <?php echo 24 * $sponsorship->duration; ?> h</p>
-                            <p class="fs-5">Price: <span class="fs-3"> {{ $sponsorship->price }} €</span></p>
-
-                        </div>
-                    </label>
-                </div>
-            @endforeach
-            <div class="py-5">
-                @csrf
-
-                <div id="dropin-container" style="display: flex;justify-content: center;align-items: center;"></div>
-                <div style="display: flex;justify-content: center;align-items: center; color: white">
-                    <a id="submit-button" class="btn btn-sm btn-success">Confirm CreditCard</a>
-                </div>
-            </div>
+    <div class="py-12">
+        @csrf
+        <div id="dropin-container" style="display: flex;justify-content: center;align-items: center;"></div>
+        <input type="radio" value='2.99' name="price" checked>
+        <input type="radio" value='5.99' name="price">
+        <input type="radio" value='9.99' name="price">
+        <div style="display: flex;justify-content: center;align-items: center; color: white">
+            <a id="submit-button" class="btn btn-sm btn-success">Submit payment</a>
         </div>
     </div>
 @endsection
@@ -52,7 +29,6 @@
         }, function(createErr, instance) {
             button.addEventListener('click', function() {
                 instance.requestPaymentMethod(function(err, payload) {
-                    button.innerHTML = "Submit payment"
                     button.addEventListener('click', function() {
                         instance.requestPaymentMethod(function(err, payload) {
                             (function($) {
@@ -65,12 +41,10 @@
                                                 'content')
                                         }
                                     });
-                                    let apartment_id = $(
-                                        '#apartment-id').val();
+                                    // var test = $('#test').val();
                                     let price = $(
                                         'input[name="price"]:checked'
                                     ).val();
-
 
                                     $.ajax({
                                         type: "POST",
@@ -78,7 +52,6 @@
                                         data: {
                                             nonce: payload
                                                 .nonce,
-                                            apartment_id: apartment_id,
                                             price: price
                                         },
                                         success: function(
@@ -87,18 +60,13 @@
                                             console.log(
                                                 'success',
                                                 price,
-                                                apartment_id,
                                                 payload
                                                 .nonce)
-                                            window.location
-                                                .href =
-                                                "{{ route('admin.apartments.index') }}";
                                         },
                                         error: function(data) {
                                             console.log(
                                                 'error',
                                                 price,
-                                                apartment_id,
                                                 payload
                                                 .nonce)
                                         }
