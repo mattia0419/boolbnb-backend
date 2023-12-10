@@ -39,3 +39,9 @@
 .select:checked + label {
     background-color: rgba(0, 128, 0, 0.5);
 }
+
+.position {
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+}

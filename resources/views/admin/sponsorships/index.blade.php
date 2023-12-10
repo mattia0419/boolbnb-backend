@@ -98,7 +98,7 @@
                                                 .nonce)
                                             window.location
                                                 .href =
-                                                "{{ route('admin.apartments.index') }}";
+                                                "http://localhost:5174/";
                                         },
                                         error: function(data) {
                                             console.log(

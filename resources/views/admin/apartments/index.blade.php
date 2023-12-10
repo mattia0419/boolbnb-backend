@@ -28,7 +28,11 @@
                                     {{ $apartment->title }}
                                 </h5>
                             </div>
-                            <div class="card-body pb-0 text-start">
+                            <div class="card-body pb-0 text-start  position-relative">
+                                {{-- @dd($) --}}
+                                {{-- @if ($apartment->sponsorships)
+                                    <span class="badge text-bg-success position">Success</span>
+                                @endif --}}
                                 <p>
                                     @if ($apartment->address)
                                         {{ $apartment->address }}
