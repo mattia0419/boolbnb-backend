@@ -12,10 +12,17 @@
 
 @section('content')
     <div class="container">
-        <h1 class="my-3">Add apartment</h1>
+        <div class="my-3 d-flex flex-row justify-content-between align-items-center">
+            <h1 class="my-3">Add apartment</h1>
+
+            <a class="btn btn-outline-primary text-nowrap" href="{{ route('admin.apartments.index') }}">
+                <i class="fa-solid fa-arrow-left me-2"></i>GO BACK
+            </a>
+        </div>
         <h6 class="mb-4" style="font-style: italic">Fields with * are required</h6>
 
-        <form action="{{ route('admin.apartments.store') }}" method="POST" class="row g-3" enctype="multipart/form-data" id="create-form">
+        <form action="{{ route('admin.apartments.store') }}" method="POST" class="row g-3" enctype="multipart/form-data"
+            id="create-form">
             @csrf
 
             <div class="col-12">
@@ -67,7 +74,7 @@
                 <input type="number" name="bathrooms" id="bathrooms" max="999" min="1"
                     class="form-control @error('bathrooms') is-invalid @enderror" value="{{ old('bathrooms') }}">
                 <span class="text-danger" id="bathrooms_error"></span>
-                
+
                 @error('bathrooms')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -94,13 +101,13 @@
                 </label>
                 {{-- <input type="text" name="address" id="address"
                     class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}"> --}}
-                    @error('address')
+                @error('address')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
-                    @enderror
-                </div>
-                <span class="text-danger mt-0" id="address_error"></span>
+                @enderror
+            </div>
+            <span class="text-danger mt-0" id="address_error"></span>
             <div class="col-12">
                 <label for="price">
                     Price *
@@ -108,7 +115,7 @@
                 <input type="number" name="price" id="price"
                     class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}" step="0.01">
                 <span class="text-danger" id="price_error"></span>
-                
+
                 @error('price')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -119,7 +126,7 @@
                 <span>
                     Services * <span style="font-style: italic">(at least one)</span>
                 </span>
-                <div class="col-2 d-flex">
+                <div class="row row-cols-2 row-cols-lg-6">
                     @foreach ($services as $service)
                         <div class="col-12">
                             <input type="checkbox" name="services[]" id="service-{{ $service->id }}"
@@ -129,9 +136,9 @@
 
                             <label for="service-{{ $service->id }}">{{ $service->label }}</label>
                             @error('services')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
                     @endforeach
@@ -145,16 +152,16 @@
                 <input type="file" name="cover_img" id="cover_img"
                     class="form-control @error('cover_img') is-invalid @enderror" value="{{ old('cover_img') }}">
                 <span class="text-danger" id="cover_img_error"></span>
-                
-                    
+
+
                 @error('cover_img')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            <div class="col-6">
-                <img src="" alt="" class="img-fluid" id="cover_image_preview">
+            <div class="col-12">
+                <img src="" alt="" class="w-25 img-fluid rounded " id="cover_image_preview">
             </div>
             <div class="col-12">
                 <label for="visible">
@@ -210,7 +217,7 @@
         searchboxInput.setAttribute('value', '{{ old('address') }}');
         searchboxInput.setAttribute('class',
             'form-control @error('address') is-invalid @enderror'
-            );
+        );
 
         // client-side validation
         function validate() {
@@ -226,13 +233,13 @@
             let coverImg = document.getElementById('cover_img').value;
             let servicesArray = document.getElementsByName('services[]')
             let checkedArray = [];
-            
-            for(let i = 0; i < servicesArray.length; i++) {
-                if(servicesArray[i].checked == true) {
+
+            for (let i = 0; i < servicesArray.length; i++) {
+                if (servicesArray[i].checked == true) {
                     checkedArray.push(servicesArray[i])
                 }
             }
-            
+
             let titleError = document.getElementById('title_error');
             let roomsError = document.getElementById('rooms_error');
             let bedsError = document.getElementById('beds_error');
@@ -254,49 +261,50 @@
             coverImgError.innerHTML = "";
             servicesError.innerHTML = "";
 
-            if (title.length <= 0 || rooms <= 0 || beds <= 0 || bathrooms <= 0 || squareMeters <= 0 || address.length <= 3 || price <= 0 || !coverImg || checkedArray.length <= 0) {
+            if (title.length <= 0 || rooms <= 0 || beds <= 0 || bathrooms <= 0 || squareMeters <= 0 || address.length <=
+                3 || price <= 0 || !coverImg || checkedArray.length <= 0) {
 
-                if(title.length <= 0) {
+                if (title.length <= 0) {
                     titleError.innerHTML = "You need to enter a title";
                 }
 
-                if(rooms.length <= 0) {
+                if (rooms.length <= 0) {
                     roomsError.innerHTML = "You need to enter at least 1 room";
                 }
 
-                if(beds.length <= 0) {
+                if (beds.length <= 0) {
                     bedsError.innerHTML = "You need to enter at least 1 bed";
                 }
 
-                if(bathrooms.length <= 0) {
+                if (bathrooms.length <= 0) {
                     bathroomsError.innerHTML = "You need to enter at least 1 bathroom";
                 }
 
-                if(squareMeters.length <= 0) {
+                if (squareMeters.length <= 0) {
                     squareMetersError.innerHTML = "The apartment is too small";
                 }
 
-                if(address.length <= 3) {
+                if (address.length <= 3) {
                     addressError.innerHTML = "You need to enter an address";
                 }
 
-                if(price.length <= 0) {
+                if (price.length <= 0) {
                     priceError.innerHTML = "You need to enter a price";
                 }
 
-                if(!coverImg) {
+                if (!coverImg) {
                     coverImgError.innerHTML = "You need to upload a cover img";
                 }
 
-                if(checkedArray.length <= 0){ 
+                if (checkedArray.length <= 0) {
                     servicesError.innerHTML = "You need to have at least 1 service";
                 }
-                
+
                 return false;
             } else {
                 createForm.submit();
             }
-            
-        }        
+
+        }
     </script>
 @endsection

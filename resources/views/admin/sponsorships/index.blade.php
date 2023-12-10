@@ -9,14 +9,20 @@
 
 @section('content')
     <div class="container">
-        <h1 class="my-5">Choose your plan</h1>
-        <div class="row">
+        <div class="my-3 d-flex flex-row justify-content-between align-items-center">
+            <h1 class="my-5">Choose your plan</h1>
+
+            <a class="btn btn-outline-primary" href="{{ route('admin.apartments.index') }}">
+                <i class="fa-solid fa-arrow-left me-2"></i>GO BACK
+            </a>
+        </div>
+        <div class="row g-3">
             <div id="prova"></div>
             <input type="hidden" value='{{ array_key_first($apartment) }}' id="apartment-id">
             @foreach ($sponsorships as $sponsorship)
-                <div class="col-4">
-                    <input class="d-none select" type="radio" id="{{ $sponsorship->id }}" value='{{ $sponsorship->price }}'
-                        name="price" checked>
+                <div class="col-12 col-lg-4">
+                    <input class="d-none select" type="radio" id="{{ $sponsorship->id }}"
+                        value='{{ $sponsorship->price }}' name="price" checked>
                     <label for="{{ $sponsorship->id }}" class="card text-center">
                         <div class="card-header">
                             <h4>{{ $sponsorship->label }}</h4>

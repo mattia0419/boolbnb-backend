@@ -62,9 +62,9 @@
                                     <i class="fa-regular fa-trash-can me-2"></i>
                                     DELETE
                                 </button>
-                                <a class="btn mx-2 btn-outline-primary"
+                                <a class="btn mt-lg-2 mt-2 mt-md-0 mx-2 btn-outline-primary"
                                     href="{{ route('admin.sponsorships.index', $apartment) }}">
-                                    <i class="fa-solid fa-pen me-2"></i>SPONSORSHIP
+                                    <i class="fa-solid fa-coins me-2"></i>SPONSORSHIP
                                 </a>
 
                             </div>
