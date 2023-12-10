@@ -1,8 +1,9 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('guest.home') }}">Navbar</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId"
-            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="http://localhost:5174/">BoolBnB</a>
+        <button class="navbar-toggler d-lg-none active" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
@@ -11,7 +12,7 @@
                     <a class="nav-link {{ Route::currentRouteName() == 'guest.home' ? 'active' : '' }}"
                         href="http://localhost:5174/" aria-current="page">Home<span
                             class="visually-hidden">(current)</span></a>
-                            {{-- {{ route('guest.home') }} --}}
+                    {{-- {{ route('guest.home') }} --}}
                 </li>
 
                 @guest
@@ -35,7 +36,7 @@
                                 class="visually-hidden">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
-                        
+
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->email }}
